@@ -1,11 +1,11 @@
-import express, { Application, Request, Response } from 'express'
+import bodyParser from 'body-parser'
+import express, { Application } from 'express'
+import indexRouter from './routes/index'
 
 const app: Application = express()
-
 const PORT = process.env.PORT || 5000
 
-app.get('/hello', (req: Request, res: Response) => {
-	res.send('Hello')
-})
+app.use(bodyParser.json())
+app.use('/api', indexRouter)
 
 app.listen(PORT, () => console.log('Listening'))
