@@ -1,0 +1,24 @@
+{
+	"name": "url-shortner",
+	"version": "1.0.0",
+	"description": "URL Shortener",
+	"main": "index.js",
+	"repository": "https://github.com/abhideepm/URL-Shortener.git",
+	"author": "Abhideep Maity <abhideepm@gmail.com>",
+	"license": "MIT",
+	"scripts": {
+		"start": "node dist/app.js",
+		"dev": "nodemon src/app.ts",
+		"build": "tsc -p ."
+	},
+	"dependencies": {
+		"express": "^4.17.1"
+	},
+	"devDependencies": {
+		"@types/express": "^4.17.7",
+		"@types/node": "^14.6.2",
+		"nodemon": "^2.0.4",
+		"ts-node": "^9.0.0",
+		"typescript": "^4.0.2"
+	}
+}
