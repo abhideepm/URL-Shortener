@@ -29,11 +29,11 @@ const userSchema: Schema = new mongoose.Schema({
 	},
 	token: {
 		type: String,
-		default: null,
+		default: undefined,
 	},
 	tokenExpiration: {
 		type: Number,
-		default: null,
+		default: undefined,
 	},
 })
 
