@@ -12,11 +12,16 @@ import React from 'react'
 import { useForm } from 'react-hook-form'
 import { Link, useHistory } from 'react-router-dom'
 
+interface IFormInput {
+	email: string
+	password: string
+}
+
 const Login: React.FC = () => {
 	const history = useHistory()
 	const { register, handleSubmit } = useForm()
 
-	const onSubmit = (data: JSON): void => {
+	const onSubmit = (data: IFormInput): void => {
 		console.log(data)
 	}
 	return (
