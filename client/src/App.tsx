@@ -8,6 +8,7 @@ import {
 import Login from './Components/Login'
 import Register from './Components/Register'
 import ForgotPassword from './Components/ForgotPassword'
+import ResetPassword from './Components/ResetPassword'
 
 const App: React.FC = () => {
 	return (
@@ -17,6 +18,7 @@ const App: React.FC = () => {
 					<Route exact path="/login" component={Login} />
 					<Route exact path="/register" component={Register} />
 					<Route exact path="/forgotpassword" component={ForgotPassword} />
+					<Route exact path="/resetpassword" component={ResetPassword} />
 					<Redirect from="/" to="/login" />
 				</Switch>
 			</Router>
