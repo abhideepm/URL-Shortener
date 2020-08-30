@@ -65,6 +65,7 @@ router.post('/resetpassword', async (req: Request, res: Response) => {
 				password: hash,
 				token: undefined,
 				tokenExpiration: undefined,
+				active: true,
 			}
 		)
 		const mailOptions = {

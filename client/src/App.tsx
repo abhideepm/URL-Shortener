@@ -7,6 +7,7 @@ import {
 } from 'react-router-dom'
 import Login from './Components/Login'
 import Register from './Components/Register'
+import ForgotPassword from './Components/ForgotPassword'
 
 const App: React.FC = () => {
 	return (
@@ -15,6 +16,7 @@ const App: React.FC = () => {
 				<Switch>
 					<Route exact path="/login" component={Login} />
 					<Route exact path="/register" component={Register} />
+					<Route exact path="/forgotpassword" component={ForgotPassword} />
 					<Redirect from="/" to="/login" />
 				</Switch>
 			</Router>
