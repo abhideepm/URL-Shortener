@@ -1,5 +1,6 @@
 import { Request, Response, Router } from 'express'
 import shortUrl from '../models/shortUrl'
+import user from '../models/user'
 const router: Router = Router()
 
 router.get('/allurls', async (req: Request, res: Response) => {
@@ -17,6 +18,19 @@ router.get('/url/:shortUrl', async (req, res) => {
 	if (urlData == null) return res.sendStatus(404)
 
 	res.send(urlData.full)
+})
+
+router.post('/register', async (req: Request, res: Response) => {
+	try {
+		const userExists = await user.findOne({ email: req.body.email })
+		if (userExists) return res.send({ message: 'User already exists' })
+
+		await user.create(req.body)
+		res.send({ message: 'Successfully registered' })
+	} catch (err) {
+		console.log(err)
+		res.send({ message: err._message })
+	}
 })
 
 export default router
