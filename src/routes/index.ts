@@ -3,6 +3,10 @@ import shortUrl from '../models/shortUrl'
 import user from '../models/user'
 import { body, validationResult } from 'express-validator'
 const router: Router = Router()
+import crypto from 'crypto'
+import sendMail from '../config/sendMail'
+import Mail from 'nodemailer/lib/mailer'
+import newUser from '../templates/newUser'
 
 router.get('/allurls', async (req: Request, res: Response) => {
 	const urls = await shortUrl.find()
@@ -29,14 +33,25 @@ router.post(
 			const errors = validationResult(req)
 			if (!errors.isEmpty())
 				return res.status(400).json({ errors: errors.array() })
-			const userExists = await user.findOne({ email: req.body.email })
-			if (userExists) return res.send({ message: 'User already exists' })
 
 			await user.create(req.body)
-			res.send({ message: 'Successfully registered' })
+
+			const token: string = crypto.randomBytes(16).toString('hex')
+			await user.findOneAndUpdate(
+				{ email: req.body.email },
+				{ token: token, tokenExpiration: Date.now() + 15 * 60 * 1000 }
+			)
+			const url = `something/${token}`
+			const mailOptions: Mail.Options = {
+				from: `URL Shortener<urlshortener@gmail.com>`,
+				to: req.body.email,
+				subject: `Signup Successful`,
+				html: newUser(req.body.fullName, url),
+			}
+			await sendMail(mailOptions)
+			res.status(200).send({ message: 'Successfully registered' })
 		} catch (err) {
-			console.log(err)
-			res.send({ message: err._message })
+			res.status(400).send({ message: 'Error with registration' })
 		}
 	}
 )

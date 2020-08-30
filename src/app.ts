@@ -8,7 +8,11 @@ dotenv.config()
 
 const dbURL = <string>process.env.db_url
 
-mongoose.connect(dbURL, { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect(dbURL, {
+	useNewUrlParser: true,
+	useUnifiedTopology: true,
+	useCreateIndex: true,
+})
 
 const app: Application = express()
 const PORT = process.env.PORT || 5000
