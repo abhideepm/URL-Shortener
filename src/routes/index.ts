@@ -1,6 +1,7 @@
 import { Request, Response, Router } from 'express'
 import shortUrl from '../models/shortUrl'
 import user from '../models/user'
+import { body, validationResult } from 'express-validator'
 const router: Router = Router()
 
 router.get('/allurls', async (req: Request, res: Response) => {
@@ -20,17 +21,24 @@ router.get('/url/:shortUrl', async (req, res) => {
 	res.send(urlData.full)
 })
 
-router.post('/register', async (req: Request, res: Response) => {
-	try {
-		const userExists = await user.findOne({ email: req.body.email })
-		if (userExists) return res.send({ message: 'User already exists' })
+router.post(
+	'/register',
+	[body('email').isEmail()],
+	async (req: Request, res: Response) => {
+		try {
+			const errors = validationResult(req)
+			if (!errors.isEmpty())
+				return res.status(400).json({ errors: errors.array() })
+			const userExists = await user.findOne({ email: req.body.email })
+			if (userExists) return res.send({ message: 'User already exists' })
 
-		await user.create(req.body)
-		res.send({ message: 'Successfully registered' })
-	} catch (err) {
-		console.log(err)
-		res.send({ message: err._message })
+			await user.create(req.body)
+			res.send({ message: 'Successfully registered' })
+		} catch (err) {
+			console.log(err)
+			res.send({ message: err._message })
+		}
 	}
-})
+)
 
 export default router
