@@ -8,6 +8,7 @@ import {
 	TextField,
 	Typography,
 } from '@material-ui/core'
+import axios from 'axios'
 import React from 'react'
 import { useForm } from 'react-hook-form'
 import { Link, useHistory } from 'react-router-dom'
@@ -22,7 +23,12 @@ const Register: React.FC = () => {
 	const history = useHistory()
 	const { register, handleSubmit } = useForm()
 	const onSubmit = (data: IFormInput) => {
-		console.log(data)
+		axios
+			.post('/api/register', data)
+			.then(res => {
+				console.log(res.data.message)
+			})
+			.catch(err => console.error(err))
 	}
 	return (
 		<>

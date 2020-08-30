@@ -26,6 +26,7 @@ router.post(
 				userStatus.password!
 			)
 			if (match) res.status(200).json({ message: 'Successful' })
+			else throw new Error()
 		} catch (err) {
 			res.status(400).json({ message: 'Error logging in' })
 		}

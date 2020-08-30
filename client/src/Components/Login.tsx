@@ -11,6 +11,7 @@ import {
 import React from 'react'
 import { useForm } from 'react-hook-form'
 import { Link, useHistory } from 'react-router-dom'
+import axios from 'axios'
 
 interface IFormInput {
 	email: string
@@ -22,7 +23,12 @@ const Login: React.FC = () => {
 	const { register, handleSubmit } = useForm()
 
 	const onSubmit = (data: IFormInput): void => {
-		console.log(data)
+		axios
+			.post('/api/login', data)
+			.then(res => {
+				console.log(res.data.message)
+			})
+			.catch(err => console.error(err))
 	}
 	return (
 		<>
