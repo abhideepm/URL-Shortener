@@ -1,6 +1,11 @@
 import crypto from 'crypto'
 import { Request, Response, Router } from 'express'
-import { body, validationResult } from 'express-validator'
+import {
+	body,
+	validationResult,
+	ValidationError,
+	Result,
+} from 'express-validator'
 import Mail from 'nodemailer/lib/mailer'
 import sendMail from '../config/sendMail'
 import user from '../models/user'
@@ -12,7 +17,7 @@ router.post(
 	[body('email').isEmail()],
 	async (req: Request, res: Response) => {
 		try {
-			const errors = validationResult(req)
+			const errors: Result<ValidationError> = validationResult(req)
 			if (!errors.isEmpty())
 				return res.status(400).json({ errors: errors.array() })
 
