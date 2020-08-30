@@ -37,7 +37,7 @@ const Login: React.FC = () => {
 				<Grid item xs={12} sm={9} md={6} lg={4}>
 					<Card raised={true} style={{ borderRadius: '1rem' }}>
 						<CardContent>
-							<Typography variant="h4" align="center">
+							<Typography variant="h3" align="center">
 								Login
 							</Typography>
 							<form onSubmit={handleSubmit(onSubmit)}>
@@ -63,7 +63,12 @@ const Login: React.FC = () => {
 									/>
 								</Box>
 								<Box display="flex" justifyContent="center" my={2}>
-									<Button variant="contained" color="primary" type="submit">
+									<Button
+										variant="contained"
+										color="primary"
+										type="submit"
+										size="large"
+									>
 										Sign In
 									</Button>
 								</Box>
