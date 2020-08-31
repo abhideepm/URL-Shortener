@@ -1,16 +1,17 @@
-import React, { useEffect, useState } from 'react'
-import axios from 'axios'
 import {
 	Grid,
-	TableContainer,
-	Table,
-	TableHead,
-	TableBody,
-	TableRow,
-	TableCell,
 	Paper,
+	Table,
+	TableBody,
+	TableCell,
+	TableContainer,
+	TableHead,
+	TableRow,
+	Link,
 } from '@material-ui/core'
+import axios from 'axios'
 import { formatDistance } from 'date-fns'
+import React, { useEffect, useState } from 'react'
 
 interface IData {
 	full: string
@@ -56,7 +57,15 @@ const AllURLs: React.FC = () => {
 								{urlData.map(row => (
 									<TableRow key={row._id}>
 										<TableCell align="center">{row.full}</TableCell>
-										<TableCell align="center">{row.short}</TableCell>
+										<TableCell align="center">
+											<Link
+												href={`https://${row.full}`}
+												target="_blank"
+												rel="noreferrer"
+											>
+												/{row.short}
+											</Link>
+										</TableCell>
 										<TableCell align="center">
 											{formatDistance(new Date(row.created), new Date(), {
 												addSuffix: true,

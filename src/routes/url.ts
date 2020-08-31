@@ -17,11 +17,4 @@ router.post('/shorturl', async (req: Request, res: Response) => {
 	}
 })
 
-router.get('/:shortUrl', async (req, res) => {
-	const urlData = await shortUrl.findOne({ short: req.params.shortUrl })
-	if (urlData == null) return res.sendStatus(404)
-
-	res.send(urlData.full)
-})
-
 export default router
