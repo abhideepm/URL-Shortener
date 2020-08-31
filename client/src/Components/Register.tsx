@@ -3,16 +3,16 @@ import {
 	Button,
 	Card,
 	CardContent,
+	CircularProgress,
 	CssBaseline,
 	Grid,
 	TextField,
 	Typography,
-	CircularProgress,
 } from '@material-ui/core'
 import axios from 'axios'
 import React, { useState } from 'react'
 import { useForm } from 'react-hook-form'
-import { Link, useHistory } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 interface IFormInput {
 	email: string
@@ -21,7 +21,6 @@ interface IFormInput {
 }
 
 const Register: React.FC = () => {
-	const history = useHistory()
 	const { register, handleSubmit } = useForm()
 	const [loading, setLoading] = useState<boolean>(false)
 

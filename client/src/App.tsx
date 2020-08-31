@@ -1,11 +1,6 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
-import {
-	BrowserRouter as Router,
-	Redirect,
-	Route,
-	Switch,
-} from 'react-router-dom'
+import { Redirect, Route, Switch } from 'react-router-dom'
 import Dashboard from './Components/Dashboard/Dashboard'
 import ForgotPassword from './Components/ForgotPassword'
 import Login from './Components/Login'
@@ -36,7 +31,7 @@ const App: React.FC = () => {
 			<Switch>
 				<Route
 					exact
-					path="/:shorturl"
+					path="/url/:shorturl"
 					render={props => {
 						if (urlData !== null) {
 							const shorturl = props.match.params.shorturl

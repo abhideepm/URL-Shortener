@@ -5,18 +5,20 @@
 	"main": "index.js",
 	"repository": "https://github.com/abhideepm/URL-Shortener.git",
 	"author": "Abhideep Maity <abhideepm@gmail.com>",
+	"engines": {
+		"node": "14.7.0"
+	},
 	"license": "MIT",
 	"scripts": {
-		"start": "node dist/app.js",
-		"build": "tsc -p .",
+		"start": "build && node dist/app.js",
 		"client": "cd client && yarn start",
 		"server": "nodemon src/app.ts",
 		"dev": "concurrently --kill-others-on-fail \"yarn server\" \"yarn client\"",
-		"heroku-postbuild": "tsc & cd client && npm install && npm install --only=dev --no-shrinkwrap && npm run build"
+		"heroku-postbuild": "tsc -p . && cd client && yarn && yarn build"
 	},
 	"cacheDirectories": [
 		"node_modules",
-		"react-app/node_modules"
+		"client/node_modules"
 	],
 	"dependencies": {
 		"bcrypt": "^5.0.0",

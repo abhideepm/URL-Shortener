@@ -1,19 +1,16 @@
 import { AppBar, CssBaseline, Tab, Tabs } from '@material-ui/core'
 import React from 'react'
-import {
-	Route,
-	Switch,
-	useParams,
-	useRouteMatch,
-	useHistory,
-} from 'react-router-dom'
+import { Route, Switch, useHistory, useParams } from 'react-router-dom'
 import AllURLs from './AllURLs'
 import Home from './Home'
 import Stats from './Stats'
 
+interface ParamTypes {
+	tab: string
+}
+
 const Dashboard: React.FC = () => {
-	const { tab } = useParams()
-	const match = useRouteMatch()
+	const { tab } = useParams<ParamTypes>()
 	const history = useHistory()
 
 	const tabToIndex: { [key: string]: number } = {

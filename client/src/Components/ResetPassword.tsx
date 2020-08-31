@@ -19,9 +19,13 @@ interface IFormInput {
 	repeatPassword: string
 }
 
+interface ParamTypes {
+	token: string
+}
+
 const ResetPassword: React.FC = () => {
 	const history = useHistory()
-	const { token } = useParams()
+	const { token } = useParams<ParamTypes>()
 	const { register, handleSubmit, reset } = useForm()
 	const [loading, setLoading] = useState<boolean>(true)
 	const [loadingSubmit, setLoadingSubmit] = useState<boolean>(false)
