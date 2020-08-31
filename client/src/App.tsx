@@ -9,6 +9,7 @@ import Login from './Components/Login'
 import Register from './Components/Register'
 import ForgotPassword from './Components/ForgotPassword'
 import ResetPassword from './Components/ResetPassword'
+import Dashboard from './Components/Dashboard/Dashboard'
 
 const App: React.FC = () => {
 	return (
@@ -19,7 +20,9 @@ const App: React.FC = () => {
 					<Route exact path="/register" component={Register} />
 					<Route exact path="/forgotpassword" component={ForgotPassword} />
 					<Route exact path="/resetpassword/:token" component={ResetPassword} />
-					<Redirect from="/" to="/login" />
+					<Route exact path="/dashboard/:tab" component={Dashboard} />
+					<Redirect exact from="/" to="/login" />
+					<Redirect exact from="/dashboard" to="/dashboard/home" />
 				</Switch>
 			</Router>
 		</div>
