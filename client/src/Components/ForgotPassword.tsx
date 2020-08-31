@@ -35,7 +35,10 @@ const ForgotPassword: React.FC = () => {
 				}
 				setLoading(false)
 			})
-			.catch(err => console.log(err))
+			.catch(err => {
+				console.log(err)
+				setLoading(false)
+			})
 	}
 	return (
 		<>

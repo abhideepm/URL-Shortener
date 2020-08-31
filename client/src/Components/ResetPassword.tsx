@@ -59,7 +59,10 @@ const ResetPassword: React.FC = () => {
 						history.replace('/login')
 					}
 				})
-				.catch(err => alert(err))
+				.catch(err => {
+					alert(err)
+					setLoadingSubmit(false)
+				})
 		}
 	}
 	return (

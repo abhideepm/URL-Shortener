@@ -3,15 +3,16 @@ import {
 	Button,
 	Card,
 	CardContent,
+	CircularProgress,
 	CssBaseline,
 	Grid,
 	TextField,
 	Typography,
 } from '@material-ui/core'
-import React from 'react'
+import axios from 'axios'
+import React, { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { Link, useHistory } from 'react-router-dom'
-import axios from 'axios'
 
 interface IFormInput {
 	email: string
@@ -21,14 +22,20 @@ interface IFormInput {
 const Login: React.FC = () => {
 	const history = useHistory()
 	const { register, handleSubmit } = useForm()
+	const [loading, setLoading] = useState<boolean>(false)
 
 	const onSubmit = (data: IFormInput): void => {
+		setLoading(true)
 		axios
 			.post('/api/login', data)
 			.then(res => {
 				console.log(res.data.message)
+				setLoading(false)
 			})
-			.catch(err => console.error(err))
+			.catch(err => {
+				alert(err)
+				setLoading(false)
+			})
 	}
 	return (
 		<>
@@ -74,8 +81,9 @@ const Login: React.FC = () => {
 										color="primary"
 										type="submit"
 										size="large"
+										disabled={loading}
 									>
-										Sign In
+										{loading ? <CircularProgress color="inherit" /> : 'Sign In'}
 									</Button>
 								</Box>
 								<Link to="/register">

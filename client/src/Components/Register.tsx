@@ -7,9 +7,10 @@ import {
 	Grid,
 	TextField,
 	Typography,
+	CircularProgress,
 } from '@material-ui/core'
 import axios from 'axios'
-import React from 'react'
+import React, { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { Link, useHistory } from 'react-router-dom'
 
@@ -22,13 +23,20 @@ interface IFormInput {
 const Register: React.FC = () => {
 	const history = useHistory()
 	const { register, handleSubmit } = useForm()
+	const [loading, setLoading] = useState<boolean>(false)
+
 	const onSubmit = (data: IFormInput) => {
+		setLoading(true)
 		axios
 			.post('/api/register', data)
-			.then(res => {
-				console.log(res.data.message)
+			.then(() => {
+				setLoading(false)
+				alert('Please check your mail to proceed')
 			})
-			.catch(err => console.error(err))
+			.catch(err => {
+				alert(err)
+				setLoading(false)
+			})
 	}
 	return (
 		<>
@@ -84,8 +92,13 @@ const Register: React.FC = () => {
 										color="secondary"
 										type="submit"
 										size="large"
+										disabled={loading}
 									>
-										Register
+										{loading ? (
+											<CircularProgress color="inherit" />
+										) : (
+											'Register'
+										)}
 									</Button>
 								</Box>
 								<Link to="/login">
