@@ -4,6 +4,7 @@ import shortId from 'shortid'
 export interface shortURLInterface extends Document {
 	full: string
 	short?: string
+	created?: string
 }
 
 const shortURLSchema: Schema = new mongoose.Schema({
@@ -15,6 +16,11 @@ const shortURLSchema: Schema = new mongoose.Schema({
 		type: String,
 		required: true,
 		default: shortId.generate,
+	},
+	created: {
+		type: Number,
+		required: true,
+		default: Date.now(),
 	},
 })
 
