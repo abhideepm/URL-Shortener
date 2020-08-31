@@ -37,7 +37,7 @@ const Dashboard: React.FC = () => {
 		<>
 			<CssBaseline />
 			<AppBar position="static">
-				<Tabs value={tabIndex} onChange={handleChange}>
+				<Tabs value={tabIndex} onChange={handleChange} centered>
 					<Tab label="Home" />
 					<Tab label="All URLs" />
 					<Tab label="Stats" />
