@@ -83,6 +83,11 @@ const Login: React.FC = () => {
 										Register Instead
 									</Typography>
 								</Link>
+								<Link to="/forgotpassword">
+									<Typography display="block" align="center">
+										Forgot Password
+									</Typography>
+								</Link>
 							</form>
 						</CardContent>
 					</Card>

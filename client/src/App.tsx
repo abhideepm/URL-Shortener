@@ -18,7 +18,7 @@ const App: React.FC = () => {
 					<Route exact path="/login" component={Login} />
 					<Route exact path="/register" component={Register} />
 					<Route exact path="/forgotpassword" component={ForgotPassword} />
-					<Route exact path="/resetpassword" component={ResetPassword} />
+					<Route exact path="/resetpassword/:token" component={ResetPassword} />
 					<Redirect from="/" to="/login" />
 				</Switch>
 			</Router>
