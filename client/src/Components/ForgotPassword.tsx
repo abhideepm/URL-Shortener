@@ -7,8 +7,9 @@ import {
 	Grid,
 	TextField,
 	Typography,
+	CircularProgress,
 } from '@material-ui/core'
-import React from 'react'
+import React, { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { Link, useHistory } from 'react-router-dom'
 import axios from 'axios'
@@ -20,9 +21,21 @@ interface IFormInput {
 const ForgotPassword: React.FC = () => {
 	const history = useHistory()
 	const { register, handleSubmit } = useForm()
+	const [loading, setLoading] = useState<boolean>(false)
 
 	const onSubmit = (data: IFormInput): void => {
-		console.log(data)
+		setLoading(true)
+		axios
+			.post('/api/password/forgotpassword', data)
+			.then(res => {
+				if (res.data.message === 'User not found') {
+					alert('User not found')
+				} else {
+					alert('Please check your mail')
+				}
+				setLoading(false)
+			})
+			.catch(err => console.log(err))
 	}
 	return (
 		<>
@@ -62,8 +75,9 @@ const ForgotPassword: React.FC = () => {
 										color="primary"
 										type="submit"
 										size="large"
+										disabled={loading}
 									>
-										Verify
+										{loading ? <CircularProgress color="inherit" /> : 'Verify'}
 									</Button>
 								</Box>
 								<Link to="/login">

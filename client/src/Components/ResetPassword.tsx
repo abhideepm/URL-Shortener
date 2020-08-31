@@ -24,6 +24,7 @@ const ResetPassword: React.FC = () => {
 	const { token } = useParams()
 	const { register, handleSubmit, reset } = useForm()
 	const [loading, setLoading] = useState<boolean>(true)
+	const [loadingSubmit, setLoadingSubmit] = useState<boolean>(false)
 
 	useEffect(() => {
 		axios
@@ -41,6 +42,7 @@ const ResetPassword: React.FC = () => {
 	}, [])
 
 	const onSubmit = (data: IFormInput): void => {
+		setLoadingSubmit(true)
 		if (data.password !== data.repeatPassword) {
 			alert(`Passwords don't match`)
 			reset()
@@ -51,6 +53,7 @@ const ResetPassword: React.FC = () => {
 					token: token,
 				})
 				.then(res => {
+					setLoadingSubmit(false)
 					if (res.data.message === 'Success') {
 						alert('Password reset successful')
 						history.replace('/login')
@@ -121,8 +124,13 @@ const ResetPassword: React.FC = () => {
 											color="secondary"
 											type="submit"
 											size="large"
+											disabled={loadingSubmit}
 										>
-											Reset Password
+											{loadingSubmit ? (
+												<CircularProgress color="inherit" />
+											) : (
+												'Reset Password'
+											)}
 										</Button>
 									</Box>
 									<Link to="/login">
