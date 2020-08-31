@@ -9,8 +9,12 @@ router.get('/allurls', async (req: Request, res: Response) => {
 })
 
 router.post('/shorturl', async (req: Request, res: Response) => {
-	await shortUrl.create({ full: req.body.fullURL })
-	res.send('successful')
+	try {
+		await shortUrl.create({ full: req.body.fullURL })
+		res.send('successful')
+	} catch {
+		res.status(400).send('Error')
+	}
 })
 
 router.get('/:shortUrl', async (req, res) => {

@@ -44,9 +44,9 @@ const Dashboard: React.FC = () => {
 				</Tabs>
 			</AppBar>
 			<Switch>
-				<Route exact path={`${match.url}/stats`} component={Stats} />
-				<Route exact path={`${match.url}/home`} component={Home} />
-				<Route exact path={`${match.url}/allurls`} component={AllURLs} />
+				<Route exact path={`/dashboard/stats`} component={Stats} />
+				<Route exact path={`/dashboard/home`} component={Home} />
+				<Route exact path={`/dashboard/allurls`} component={AllURLs} />
 			</Switch>
 		</>
 	)
