@@ -10,7 +10,7 @@
 	},
 	"license": "MIT",
 	"scripts": {
-		"start": "build && node dist/app.js",
+		"start": "node dist/app.js",
 		"client": "cd client && yarn start",
 		"server": "nodemon src/app.ts",
 		"dev": "concurrently --kill-others-on-fail \"yarn server\" \"yarn client\"",
